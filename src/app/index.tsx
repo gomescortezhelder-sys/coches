@@ -40,104 +40,49 @@ export default function Inicio() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* PORTADA PRINCIPAL */}
       <View style={styles.hero}>
         <Image
           source={{
-            uri: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
+            uri: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
           }}
           style={styles.imagenHero}
         />
 
         <View style={styles.overlay}>
-          <Text style={styles.etiqueta}>COFFEE APP</Text>
-          <Text style={styles.titulo}>Coffee House</Text>
+          <Text style={styles.etiqueta}>APEX PERFORMANCE</Text>
+          <Text style={styles.titulo}>Luxury. Speed. Precision.</Text>
           <Text style={styles.subtitulo}>
-            Descubre aromas, sabores y experiencias alrededor del café.
+            Descubre deportivos exclusivos con ingeniería de alto rendimiento.
           </Text>
         </View>
       </View>
 
-      {/* BIENVENIDA */}
-      <View style={styles.saludoBox}>
-        <View>
-          <Text style={styles.saludoTitulo}>Hola, amante del café</Text>
-          <Text style={styles.saludoTexto}>
-            ¿Qué deseas explorar hoy?
-          </Text>
-        </View>
+      <View style={styles.actionsRow}>
+        <OpcionMenu
+          icono="📝"
+          titulo="Reserva de prueba"
+          descripcion="Agenda una experiencia de manejo con un deportivo de tu elección."
+          onPress={() => router.push("/formulario")}
+        />
 
-        <View style={styles.avatar}>
-          <Text style={styles.avatarTexto}>☕</Text>
-        </View>
+        <OpcionMenu
+          icono="🚗"
+          titulo="Galería premium"
+          descripcion="Observa nuestras últimas entregas y modelos exclusivos."
+          onPress={() => router.push("/imagenes")}
+        />
       </View>
 
-      {/* RESUMEN */}
-      <View style={styles.resumen}>
-        <View style={styles.resumenItem}>
-          <Text style={styles.resumenNumero}>3</Text>
-          <Text style={styles.resumenTexto}>Secciones</Text>
-        </View>
-
-        <View style={styles.separador} />
-
-        <View style={styles.resumenItem}>
-          <Text style={styles.resumenNumero}>100%</Text>
-          <Text style={styles.resumenTexto}>Café</Text>
-        </View>
-
-        <View style={styles.separador} />
-
-        <View style={styles.resumenItem}>
-          <Text style={styles.resumenNumero}>Expo</Text>
-          <Text style={styles.resumenTexto}>Router</Text>
-        </View>
+      <View style={styles.contactWrapper}>
+        <OpcionMenu
+          icono="📍"
+          titulo="Contacto premium"
+          descripcion="Consulta ubicación, horarios y atención personalizada."
+          onPress={() => router.push("/contacto")}
+        />
       </View>
 
-      <Text style={styles.seccionTitulo}>Explorar Coffee House</Text>
-
-      <OpcionMenu
-        icono="📝"
-        titulo="Formulario"
-        descripcion="Registra tus datos y tu preferencia de café."
-        onPress={() => router.push("/formulario")}
-      />
-
-      <OpcionMenu
-        icono="☕"
-        titulo="Galería de cafés"
-        descripcion="Explora imágenes de cafés, métodos y preparaciones."
-        onPress={() => router.push("/imagenes")}
-      />
-
-      <OpcionMenu
-        icono="📍"
-        titulo="Contacto"
-        descripcion="Consulta la información de nuestra cafetería."
-        onPress={() => router.push("/contacto")}
-      />
-
-      {/* RECOMENDACIÓN */}
-      <View style={styles.destacado}>
-        <View style={styles.destacadoIcono}>
-          <Text style={styles.destacadoEmoji}>🌸</Text>
-        </View>
-
-        <View style={styles.destacadoInfo}>
-          <Text style={styles.destacadoTitulo}>
-            Café del día
-          </Text>
-
-          <Text style={styles.destacadoTexto}>
-            Prueba un cappuccino suave con notas de vainilla
-            y un toque de canela.
-          </Text>
-        </View>
-      </View>
-
-      <Text style={styles.footer}>
-        Coffee House · Desarrollo Móvil
-      </Text>
+      <Text style={styles.footer}>Apex Performance · Atelier Motors</Text>
     </ScrollView>
   );
 }
@@ -145,222 +90,103 @@ export default function Inicio() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#FFF9F5",
+    backgroundColor: "#05070b",
     padding: 18,
   },
-
   hero: {
-    height: 280,
-    borderRadius: 28,
+    height: 300,
+    borderRadius: 30,
     overflow: "hidden",
     marginBottom: 20,
-    elevation: 6,
+    elevation: 8,
+    borderWidth: 1,
+    borderColor: "#3b3f46",
   },
-
   imagenHero: {
     width: "100%",
     height: "100%",
   },
-
   overlay: {
     position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
     padding: 22,
-    backgroundColor: "rgba(92, 53, 38, 0.76)",
+    backgroundColor: "rgba(5, 7, 11, 0.72)",
   },
-
   etiqueta: {
-    color: "#FFE7EF",
+    color: "#f5d0a9",
     fontSize: 11,
     fontWeight: "bold",
-    letterSpacing: 1.8,
+    letterSpacing: 2,
     marginBottom: 6,
   },
-
   titulo: {
     color: "#FFFFFF",
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: 6,
   },
-
   subtitulo: {
-    color: "#FFF1EA",
+    color: "#e5e7eb",
     fontSize: 14,
     lineHeight: 21,
   },
-
-  saludoBox: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
-    padding: 18,
+  actionsRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    gap: 12,
+    marginBottom: 18,
+  },
+  contactWrapper: {
     alignItems: "center",
-    marginBottom: 16,
-    elevation: 2,
+    marginBottom: 18,
   },
-
-  saludoTitulo: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#5B3A2D",
-  },
-
-  saludoTexto: {
-    marginTop: 3,
-    color: "#8B6A5D",
-    fontSize: 14,
-  },
-
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "#F8DDE7",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  avatarTexto: {
-    fontSize: 24,
-  },
-
-  resumen: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
-    paddingVertical: 16,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginBottom: 24,
-    elevation: 2,
-  },
-
-  resumenItem: {
-    flex: 1,
-    alignItems: "center",
-  },
-
-  resumenNumero: {
-    color: "#B86F7E",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-
-  resumenTexto: {
-    color: "#8B6A5D",
-    fontSize: 12,
-    marginTop: 3,
-  },
-
-  separador: {
-    width: 1,
-    height: 35,
-    backgroundColor: "#F1D7CF",
-  },
-
-  seccionTitulo: {
-    fontSize: 21,
-    fontWeight: "bold",
-    color: "#5B3A2D",
-    marginBottom: 14,
-  },
-
   card: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
+    backgroundColor: "#101827",
+    borderRadius: 22,
     padding: 16,
     marginBottom: 14,
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#F1DDD6",
+    borderColor: "#2f3b4d",
     elevation: 2,
+    flex: 1,
   },
-
   iconoCaja: {
-    width: 56,
-    height: 56,
+    width: 58,
+    height: 58,
     borderRadius: 18,
-    backgroundColor: "#FBE7ED",
+    backgroundColor: "#1a2332",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 14,
   },
-
   icono: {
-    fontSize: 25,
+    fontSize: 26,
   },
-
   cardInfo: {
     flex: 1,
   },
-
   cardTitulo: {
     fontSize: 17,
     fontWeight: "bold",
-    color: "#5B3A2D",
+    color: "#f8fafc",
     marginBottom: 4,
   },
-
   cardDescripcion: {
-    color: "#84675A",
+    color: "#d1d5db",
     fontSize: 13,
     lineHeight: 18,
   },
-
   flecha: {
     fontSize: 30,
-    color: "#C97C8E",
+    color: "#f5d0a9",
     marginLeft: 8,
   },
-
-  destacado: {
-    backgroundColor: "#F8E1E8",
-    borderRadius: 22,
-    padding: 18,
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 6,
-  },
-
-  destacadoIcono: {
-    width: 52,
-    height: 52,
-    borderRadius: 17,
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 14,
-  },
-
-  destacadoEmoji: {
-    fontSize: 25,
-  },
-
-  destacadoInfo: {
-    flex: 1,
-  },
-
-  destacadoTitulo: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#7A4C3A",
-    marginBottom: 4,
-  },
-
-  destacadoTexto: {
-    color: "#73594E",
-    fontSize: 13,
-    lineHeight: 19,
-  },
-
   footer: {
     textAlign: "center",
-    color: "#9B7A6E",
+    color: "#94a3b8",
     fontSize: 12,
     marginTop: 24,
     marginBottom: 12,

@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
-  ScrollView,
-  Text,
-  TextInput,
-  Pressable,
-  StyleSheet,
-  View,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
 } from "react-native";
 
 export default function Formulario() {
@@ -36,9 +36,9 @@ export default function Formulario() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.titulo}>Registro de usuario</Text>
+      <Text style={styles.titulo}>Reserva de prueba de manejo</Text>
       <Text style={styles.subtitulo}>
-        Completa la información para continuar.
+        Completa tus datos para agendar tu experiencia con un deportivo premium.
       </Text>
 
       <View style={styles.card}>
@@ -72,13 +72,13 @@ export default function Formulario() {
         <Text style={styles.label}>Ciudad</Text>
         <TextInput
           style={styles.input}
-          placeholder="Ej: Pasto"
+          placeholder="Ej: Bogotá"
           value={ciudad}
           onChangeText={setCiudad}
         />
 
         <Pressable style={styles.boton} onPress={enviar}>
-          <Text style={styles.botonTexto}>Enviar información</Text>
+          <Text style={styles.botonTexto}>Reservar prueba</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -88,58 +88,52 @@ export default function Formulario() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#FFF7FA",
+    backgroundColor: "#0b1020",
     padding: 20,
     justifyContent: "center",
   },
-
   titulo: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#6C4051",
+    color: "#f8fafc",
     textAlign: "center",
   },
-
   subtitulo: {
-    color: "#8A727C",
+    color: "#cbd5e1",
     textAlign: "center",
     marginBottom: 20,
   },
-
   card: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#111827",
     padding: 20,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#F2D5E0",
+    borderColor: "#374151",
     elevation: 3,
   },
-
   label: {
-    color: "#684552",
+    color: "#fca5a5",
     fontWeight: "600",
     marginBottom: 6,
   },
-
   input: {
-    backgroundColor: "#FFF9FB",
+    backgroundColor: "#1f2937",
     borderWidth: 1,
-    borderColor: "#EBC8D6",
+    borderColor: "#374151",
     borderRadius: 13,
     padding: 12,
     marginBottom: 14,
+    color: "#f8fafc",
   },
-
   boton: {
-    backgroundColor: "#C96A8B",
+    backgroundColor: "#ef4444",
     paddingVertical: 14,
     borderRadius: 13,
     alignItems: "center",
     marginTop: 4,
   },
-
   botonTexto: {
-    color: "white",
+    color: "#fff",
     fontWeight: "bold",
   },
 });
