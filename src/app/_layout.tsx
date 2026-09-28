@@ -19,6 +19,7 @@ export default function Layout() {
       <Stack.Screen name="index" options={{ title: "Inicio" }} />
       <Stack.Screen name="formulario" options={{ title: "Reserva" }} />
       <Stack.Screen name="resultado" options={{ title: "Confirmación" }} />
+      <Stack.Screen name="registros" options={{ title: "Reservas" }} />
       <Stack.Screen name="imagenes" options={{ title: "Galería" }} />
       <Stack.Screen name="contacto" options={{ title: "Contacto" }} />
       <Stack.Screen name="menu" options={{ title: "Colección" }} />

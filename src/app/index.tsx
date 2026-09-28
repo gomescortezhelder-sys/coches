@@ -1,11 +1,11 @@
 import { useRouter } from "expo-router";
 import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
+    Image,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
 
 function OpcionMenu({
@@ -79,6 +79,15 @@ export default function Inicio() {
           titulo="Contacto premium"
           descripcion="Consulta ubicación, horarios y atención personalizada."
           onPress={() => router.push("/contacto")}
+        />
+      </View>
+
+      <View style={styles.contactWrapper}>
+        <OpcionMenu
+          icono="📋"
+          titulo="Reservas registradas"
+          descripcion="Consulta las personas que ya reservaron su prueba de manejo."
+          onPress={() => router.push("/registros")}
         />
       </View>
 
