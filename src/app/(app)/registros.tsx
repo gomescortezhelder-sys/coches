@@ -30,7 +30,7 @@ export default function Registros() {
         }
 
         const { data, error: queryError } = await getSupabase()
-          .from("clientes_coche")
+          .from("clientes_coches")
           .select("id,nombre,correo,telefono,ciudad")
           .eq("correo", correo)
           .order("id", { ascending: false });

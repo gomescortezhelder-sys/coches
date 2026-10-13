@@ -3,14 +3,14 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
+  ActivityIndicator,
+  Alert,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 
 function OpcionMenu({
@@ -51,7 +51,7 @@ export default function Inicio() {
     const probarConexion = async () => {
       try {
         const { data, error } = await getSupabase()
-          .from("clientes_coche")
+          .from("clientes_coches")
           .select("id")
           .limit(1);
 
@@ -153,8 +153,8 @@ export default function Inicio() {
 
       <OpcionMenu
         icono="📋"
-        titulo="Mis registros"
-        descripcion="Consulta las reservas asociadas al correo de tu cuenta."
+        titulo="Mis reservas"
+        descripcion="Consulta las pruebas de manejo asociadas a tu cuenta."
         onPress={() => router.push("./registros")}
       />
 

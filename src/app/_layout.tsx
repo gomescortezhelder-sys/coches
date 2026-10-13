@@ -8,7 +8,7 @@ function RootNavigator() {
   if (cargando) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#c87591" />
+        <ActivityIndicator size="large" color="#f5d0a9" />
         <Text style={styles.message}>Restaurando sesión...</Text>
       </View>
     );
@@ -52,17 +52,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 28,
-    backgroundColor: "#fff8fb",
+    backgroundColor: "#05070b",
   },
   title: {
-    color: "#4b303d",
+    color: "#f8fafc",
     fontSize: 20,
     fontWeight: "700",
     textAlign: "center",
     marginBottom: 10,
   },
   message: {
-    color: "#745d69",
+    color: "#cbd5e1",
     textAlign: "center",
     marginTop: 12,
     lineHeight: 21,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 13,
     borderRadius: 14,
-    backgroundColor: "#c87591",
+    backgroundColor: "#8e3b46",
   },
   retryText: {
     color: "#ffffff",

@@ -64,7 +64,7 @@ export default function Formulario() {
 
       // Guardar registro en Supabase
       const { data, error } = await getSupabase()
-        .from("clientes_coche")
+        .from("clientes_coches")
         .insert([
           {
             nombre: nombre.trim(),

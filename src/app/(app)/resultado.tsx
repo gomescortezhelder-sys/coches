@@ -4,6 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 export default function Resultado() {
   const router = useRouter();
   const params = useLocalSearchParams<{
+    id?: string;
     nombre?: string;
     correo?: string;
     telefono?: string;
@@ -15,6 +16,11 @@ export default function Resultado() {
       <View style={styles.card}>
         <Text style={styles.titulo}>Reserva confirmada</Text>
         <Text style={styles.subtitulo}>Tu experiencia de conducción quedó registrada correctamente.</Text>
+
+        <View style={styles.item}>
+          <Text style={styles.label}>Registro</Text>
+          <Text style={styles.value}>{params.id ? `#${params.id}` : "No disponible"}</Text>
+        </View>
 
         <View style={styles.item}>
           <Text style={styles.label}>Nombre</Text>
@@ -38,6 +44,10 @@ export default function Resultado() {
 
         <Pressable style={styles.boton} onPress={() => router.push("/")}>
           <Text style={styles.botonTexto}>Volver al inicio</Text>
+        </Pressable>
+
+        <Pressable style={[styles.boton, styles.botonSecundario]} onPress={() => router.push("/registros")}>
+          <Text style={styles.botonTexto}>Ver reservas</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -92,6 +102,9 @@ const styles = StyleSheet.create({
     borderRadius: 13,
     alignItems: "center",
     marginTop: 12,
+  },
+  botonSecundario: {
+    backgroundColor: "#4f46e5",
   },
   botonTexto: {
     color: "#FFFFFF",

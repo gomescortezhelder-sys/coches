@@ -11,9 +11,33 @@ type AuthContextValue = {
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+const SESSION_RESTORE_TIMEOUT_MS = 15_000;
 
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : String(error);
+}
+
+async function withSessionTimeout<T>(operation: Promise<T>) {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_resolve, reject) => {
+    timeoutId = setTimeout(
+      () =>
+        reject(
+          new Error(
+            "La conexión de Supabase tardó demasiado. Comprueba tu conexión e inténtalo de nuevo."
+          )
+        ),
+      SESSION_RESTORE_TIMEOUT_MS
+    );
+  });
+
+  try {
+    return await Promise.race([operation, timeout]);
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  }
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -26,7 +50,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setError(null);
 
     try {
-      const { data, error: sessionError } = await getSupabase().auth.getSession();
+      const { data, error: sessionError } = await withSessionTimeout(
+        getSupabase().auth.getSession()
+      );
       if (sessionError) {
         throw sessionError;
       }
@@ -53,7 +79,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
         subscription = authListener.subscription;
 
-        const { data, error: sessionError } = await supabase.auth.getSession();
+        const { data, error: sessionError } = await withSessionTimeout(
+          supabase.auth.getSession()
+        );
         if (sessionError) {
           throw sessionError;
         }
