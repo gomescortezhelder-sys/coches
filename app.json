@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "MiPrimeraApp",
-    "slug": "MiPrimeraApp",
+    "name": "Apex Performance",
+    "slug": "apex-performance",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "miprimeraapp",
+    "scheme": "apexperformance",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"

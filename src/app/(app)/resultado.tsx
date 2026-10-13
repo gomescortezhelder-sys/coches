@@ -36,7 +36,7 @@ export default function Resultado() {
           <Text style={styles.value}>{params.ciudad ?? "No disponible"}</Text>
         </View>
 
-        <Pressable style={styles.boton} onPress={() => router.push("/index")}>
+        <Pressable style={styles.boton} onPress={() => router.push("/")}>
           <Text style={styles.botonTexto}>Volver al inicio</Text>
         </Pressable>
       </View>

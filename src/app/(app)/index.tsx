@@ -1,11 +1,16 @@
+import { getSupabase } from "@/lib/supabase";
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
+    ActivityIndicator,
+    Alert,
+    Image,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
 
 function OpcionMenu({
@@ -37,9 +42,73 @@ function OpcionMenu({
 
 export default function Inicio() {
   const router = useRouter();
+  const { session } = useAuth();
+  const [mensaje, setMensaje] = useState("Conectando con Supabase...");
+  const [cargando, setCargando] = useState(true);
+  const [cerrandoSesion, setCerrandoSesion] = useState(false);
+
+  useEffect(() => {
+    const probarConexion = async () => {
+      try {
+        const { data, error } = await getSupabase()
+          .from("clientes_coche")
+          .select("id")
+          .limit(1);
+
+        if (error) {
+          setMensaje(`Supabase conectado, pero hubo un error: ${error.message}`);
+        } else {
+          setMensaje(
+            data && data.length > 0
+              ? "Conectado. La tabla de reservas está disponible."
+              : "Conectado. La tabla de reservas está disponible y todavía no tiene registros."
+          );
+        }
+      } catch (error) {
+        setMensaje(
+          `Error de conexión: ${error instanceof Error ? error.message : String(error)}`
+        );
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    probarConexion();
+  }, []);
+
+  const cerrarSesion = async () => {
+    setCerrandoSesion(true);
+    try {
+      const { error } = await getSupabase().auth.signOut();
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      Alert.alert(
+        "No se pudo cerrar la sesión",
+        error instanceof Error ? error.message : String(error)
+      );
+    } finally {
+      setCerrandoSesion(false);
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.accountRow}>
+        <Text style={styles.accountText}>{session?.user.email}</Text>
+        <Pressable
+          accessibilityRole="button"
+          disabled={cerrandoSesion}
+          onPress={cerrarSesion}
+          style={[styles.logoutButton, cerrandoSesion && styles.logoutDisabled]}
+        >
+          <Text style={styles.logoutText}>
+            {cerrandoSesion ? "Cerrando..." : "Cerrar sesión"}
+          </Text>
+        </Pressable>
+      </View>
+
       <View style={styles.hero}>
         <Image
           source={{
@@ -82,6 +151,39 @@ export default function Inicio() {
         />
       </View>
 
+      <OpcionMenu
+        icono="📋"
+        titulo="Mis registros"
+        descripcion="Consulta las reservas asociadas al correo de tu cuenta."
+        onPress={() => router.push("./registros")}
+      />
+
+      <View style={styles.actionsRow}>
+        <OpcionMenu
+          icono="🏎️"
+          titulo="Modelos"
+          descripcion="Conoce la colección disponible."
+          onPress={() => router.push("/menu")}
+        />
+        <OpcionMenu
+          icono="⚙️"
+          titulo="Accesorios"
+          descripcion="Explora equipamiento premium."
+          onPress={() => router.push("/productos")}
+        />
+      </View>
+
+      <View style={styles.supabaseBox}>
+        {cargando ? (
+          <View style={styles.supabaseLoading}>
+            <ActivityIndicator color="#f5d0a9" />
+            <Text style={styles.supabaseText}>{mensaje}</Text>
+          </View>
+        ) : (
+          <Text style={styles.supabaseText}>{mensaje}</Text>
+        )}
+      </View>
+
       <Text style={styles.footer}>Apex Performance · Atelier Motors</Text>
     </ScrollView>
   );
@@ -93,6 +195,26 @@ const styles = StyleSheet.create({
     backgroundColor: "#05070b",
     padding: 18,
   },
+  accountRow: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+  accountText: {
+    color: "#cbd5e1",
+    flex: 1,
+    fontSize: 13,
+    marginRight: 12,
+  },
+  logoutButton: {
+    backgroundColor: "#8e3b46",
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+  },
+  logoutDisabled: { opacity: 0.6 },
+  logoutText: { color: "#ffffff", fontSize: 13, fontWeight: "700" },
   hero: {
     height: 300,
     borderRadius: 30,
@@ -183,6 +305,24 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "#f5d0a9",
     marginLeft: 8,
+  },
+  supabaseBox: {
+    backgroundColor: "#101827",
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "#2f3b4d",
+    padding: 14,
+    marginBottom: 20,
+  },
+  supabaseLoading: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  supabaseText: {
+    color: "#e5e7eb",
+    fontSize: 13,
+    lineHeight: 20,
   },
   footer: {
     textAlign: "center",
